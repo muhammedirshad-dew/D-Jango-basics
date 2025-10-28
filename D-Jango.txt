@@ -1,0 +1,151 @@
+Django Project Setup Steps
+========================== 
+Step 1: Create a Virtual Environment
+
+python -m venv djenv 
+
+Explanation: A virtual environment helps to keep your project dependencies isolated.
+--------------------------------------------
+
+Step 2: Activate the Virtual Environment
+----------------------------------------
+
+djenv\Scripts\activate
+For PowerShell (Run as Administrator if needed):
+Set-ExecutionPolicy RemoteSigned
+djenv\Scripts\Activate.ps1
+
+----------------------------------------
+
+Step 3: Install Django
+----------------------
+
+pip install Django
+-----------------------
+
+Step 4: Start a Django Project
+------------------------------
+django-admin startproject django_tutorial
+
+Step 5: Enter the Project Folder
+--------------------------------
+
+cd django_tutorial
+------------------
+
+Step 6: Create an App (Component) Inside the Project
+----------------------------------------------------
+
+python manage.py startapp home
+------------------------------
+
+Step 7: Run the Development Server
+----------------------------------
+
+python manage.py runserver
+Then open your browser and go to: http://127.0.0.1:8000/
+
+-------------------------------------------------------
+
+Step 8: Mount the App (‘home’) to the Project
+---------------------------------------------
+1. Open settings.py (inside django_tutorial folder) 
+2. Find the list named INSTALLED_APPS 
+3. Add 'home', like this: 
+INSTALLED_APPS = [
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes', 
+'django.contrib.sessions', 
+'django.contrib.messages', 
+'django.contrib.staticfiles', 
+'home', # added app here
+
+
+step-9
+
+MVT design pattern(python followed this pattern)---model,view,template
+------------------------------------------------
+
+url mapping
+-----------
+
+djangoproject------url.py-------path('',include("home.urls")),//this homepage will come first while run
+
+then create a url.py file in home app
+-------------------------------------
+from django.urls import path,include
+from .import views
+
+urlpatterns = [
+   
+    path('',views.index),
+]
+
+then go to view.py and create functions like,index,about,etc..
+
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello World")
+
+def about(request):
+    return HttpResponse("about page")
+
+------------------------------------------------------
+
+
+step-10
+
+django templates  ------which means html file
+--------------------------------------------------
+
+--create a templates folder and
+--- create html file then...
+-- add this into settings.py's in project folder.
+eg:
+TEMPLATES = 
+   
+ -----------  'DIRS': ['templates'],------------------------
+       
+------------------------------------------------------------------------
+--then add this into views.py 
+
+def index(request):
+    return render(request, 'index.html')
+
+----------------------------------------------------------------------------------
+
+step-11
+
+variable and tags
+-----------------
+--access varible--- using{{}}
+
+
+
+--tags--conditons--
+
+         {%if num1 > 0 %}
+         <h2>Positive Number</h2>
+
+        {%elif num1 < 0 %}
+         <h2>Negative Number</h2>
+
+        {%else %}
+         <h2> Number is zero</h2>
+
+        {% endif %}
+
+
+--loop--- 
+
+    {% for n in num1 %}
+
+       <h2>{{n}}</h2>
+
+        {% endfor %}
+    
+
+-------------------------------------------
