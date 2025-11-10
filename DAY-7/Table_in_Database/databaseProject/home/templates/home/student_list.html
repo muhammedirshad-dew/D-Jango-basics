@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Students</h2>
+    <ul class="list-group">
+        {% for student in students %}
+            <li class="list-group-item">
+                <h5>{{ student.name }}</h5>
+                <p class="mb-1">{{ student.email }}</p>
+                <small>DOB: {{ student.date_of_birth }}</small>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No students registered.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

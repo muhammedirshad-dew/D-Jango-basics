@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ course.name }}</h2>
+    <p>{{ course.description }}</p>
+    <p><strong>Duration:</strong> {{ course.start_date }} to {{ course.end_date }}</p>
+
+    <hr>
+
+    <h4>Enrolled Students</h4>
+    <ul class="list-group">
+        {% for enrollment in enrollments %}
+            <li class="list-group-item">
+                {{ enrollment.student.name }} ({{ enrollment.student.email }})
+                <br>
+                <small>Enrolled on: {{ enrollment.enrolled_on }}</small>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No students enrolled in this course yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
